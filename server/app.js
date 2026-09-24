@@ -23,6 +23,7 @@ const allowedOrigins = [
   'http://127.0.0.1:5174',
   'http://localhost:3000',
   'http://localhost:4173',
+  'https://paexo.vercel.app',
   process.env.CLIENT_URL,
 ].filter(Boolean);
 

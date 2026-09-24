@@ -41,6 +41,7 @@ function App() {
         <Route path="/products/:id" element={<ProtectedRoute token={token}><ProductDetailPage /></ProtectedRoute>} />
         <Route path="/products/:id/interview" element={<ProtectedRoute token={token}><VoiceInterviewPage /></ProtectedRoute>} />
         <Route path="/products/:id/market-packs" element={<ProtectedRoute token={token}><MarketPacksPage /></ProtectedRoute>} />
+        <Route path="/products/:id/market-packs/validate" element={<ProtectedRoute token={token}><MarketPacksPage /></ProtectedRoute>} />
         <Route path="/products/:id/opportunities" element={<ProtectedRoute token={token}><OpportunitiesPage /></ProtectedRoute>} />
         <Route path="/products/:id/validation" element={<ProtectedRoute token={token}><ValidationPage /></ProtectedRoute>} />
         <Route path="/products/:id/pricing" element={<ProtectedRoute token={token}><PricingPage /></ProtectedRoute>} />
@@ -878,6 +879,7 @@ ${pack.content?.presentationNotes || 'N/A'}
     try {
       const { data } = await api.post(`/market-packs/${packId}/validate`);
       setPacks((current) => current.map((pack) => pack.id === packId ? data.data : pack));
+      navigate(`/products/${id}/market-packs/validate`);
     } catch (err) {
       setError(err.response?.data?.message || 'Unable to run the prototype check.');
     }
@@ -1210,6 +1212,7 @@ const getJourneyStep = (pathname) => {
   if (pathname.includes('/interview')) return 'complete';
   if (pathname.includes('/validation')) return 'verify';
   if (pathname.includes('/pricing')) return 'price';
+  if (pathname.includes('/market-packs/validate')) return 'validate';
   if (pathname.includes('/market-packs')) return 'adapt';
   if (pathname.includes('/opportunities')) return 'market-ready';
   return 'review';
@@ -1223,7 +1226,7 @@ function ProductJourney({ productId, currentStep }) {
     { key: 'verify', label: 'Verify', path: `/products/${productId}/validation` },
     { key: 'price', label: 'Price', path: `/products/${productId}/pricing` },
     { key: 'adapt', label: 'Adapt', path: `/products/${productId}/market-packs` },
-    { key: 'validate', label: 'Validate', path: `/products/${productId}/market-packs` },
+    { key: 'validate', label: 'Validate', path: `/products/${productId}/market-packs/validate` },
     { key: 'market-ready', label: 'Market Ready', path: `/products/${productId}/opportunities` },
   ];
   const activeIndex = Math.max(0, steps.findIndex((step) => step.key === currentStep));
