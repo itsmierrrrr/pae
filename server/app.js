@@ -26,16 +26,19 @@ const allowedOrigins = [
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
-const isLocalDevelopmentOrigin = (origin = '') => /^https?:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin);
-
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin) || isLocalDevelopmentOrigin(origin)) {
-        callback(null, true);
-        return;
+      if (!origin) {
+        return callback(null, true);
       }
-      callback(new Error('Origin not allowed by CORS'));
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.log('CORS blocked origin:', origin);
+      return callback(new Error('Origin not allowed by CORS'));
     },
     credentials: true,
     methods: ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
