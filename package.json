@@ -1,0 +1,41 @@
+{
+  "name": "pae",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:client": "vite",
+    "dev:server": "node --watch server/server.js",
+    "server": "node server/server.js",
+    "build": "vite build",
+    "lint": "oxlint src server --ignore-pattern node_modules",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.11.0",
+    "bcryptjs": "^3.0.0",
+    "concurrently": "^9.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "framer-motion": "^13.4.0",
+    "json-web-token": "^3.0.13",
+    "jsonwebtoken": "^9.0.2",
+    "locomotive-scroll": "^5.0.1",
+    "lucide-react": "^1.47.0",
+    "mongoose": "^8.8.4",
+    "multer": "^2.0.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "nodemon": "^3.1.9",
+    "oxlint": "^1.81.0",
+    "vite": "^8.3.0"
+  }
+}
