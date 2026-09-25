@@ -10,12 +10,14 @@ import {
   getPassport,
   updatePassport,
   verifyPassport,
+  predictPrice,
 } from '../controllers/productController.js';
 
 const router = express.Router();
 
 router.use(protect);
 router.post('/', createProduct);
+router.post('/predict-price', predictPrice);
 router.get('/', getProducts);
 router.get('/:id', getProduct);
 router.put('/:id', updateProduct);

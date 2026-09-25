@@ -132,3 +132,19 @@ export const verifyPassport = async (req, res) => {
 
   return res.json({ success: true, data: { passport, product: serializeProduct(product) }, message: 'Passport verified.' });
 };
+
+export const predictPrice = async (req, res) => {
+  const { imageUrl } = req.body;
+  if (!imageUrl) {
+    return res.status(400).json({ success: false, message: 'Image URL is required' });
+  }
+
+  // Simulate AI prediction based on image
+  const predictedPrice = Math.floor(Math.random() * 4500) + 500;
+  
+  return res.json({
+    success: true,
+    data: { price: predictedPrice },
+    message: 'Price predicted successfully'
+  });
+};

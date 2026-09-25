@@ -19,6 +19,14 @@ const initialForm = {
   imageUrl: '',
 };
 
+
+const getImageUrl = (path) => {
+  if (!path) return '';
+  if (path.startsWith('http')) return path;
+  const baseUrl = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api').replace('/api', '');
+  return `${baseUrl}${path}`;
+};
+
 function App() {
   const storedToken = localStorage.getItem(STORAGE_KEY);
   const [token, setToken] = useState(storedToken === 'demo-token' ? '' : (storedToken || ''));
@@ -356,7 +364,7 @@ function DashboardPage() {
           {products.map((product) => (
             <div key={product.id} className="surface-card product-card" onClick={() => navigate(`/products/${product.id}`)}>
               <div className="product-thumb">
-                {product.imageUrl ? <img src={`http://localhost:5000${product.imageUrl}`} alt={product.title} /> : <UploadCloud size={40} />}
+                {product.imageUrl ? <img src={getImageUrl(product.imageUrl)} alt={product.title} /> : <UploadCloud size={40} />}
               </div>
               <div className="product-card-body">
                 <div className="meta-row">
@@ -391,8 +399,18 @@ function AddProductPage() {
     formData.append('image', file);
     try {
       const { data } = await api.post('/uploads', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
-      setImages([data.data.imageUrl]);
-      handleChange('imageUrl', data.data.imageUrl);
+      const newImageUrl = data.data.imageUrl;
+      setImages([newImageUrl]);
+      handleChange('imageUrl', newImageUrl);
+      
+      try {
+        const predictRes = await api.post('/products/predict-price', { imageUrl: newImageUrl });
+        if (predictRes.data?.data?.price) {
+          handleChange('price', predictRes.data.data.price);
+        }
+      } catch (err) {
+        console.warn('AI Price prediction failed', err);
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Image upload failed.');
     }
@@ -657,6 +675,11 @@ function ProductDetailPage() {
         <div className="two-col-layout">
           <section className="surface-card">
             <div className="section-heading"><div><p className="eyebrow">Product passport</p><h3>Product information</h3></div><span className="fact-badge">Verified facts</span></div>
+            {product.imageUrl && (
+              <div className="passport-image-container" style={{ marginBottom: '20px' }}>
+                <img src={getImageUrl(product.imageUrl)} alt={product.title} style={{ width: '100%', borderRadius: '8px', maxHeight: '300px', objectFit: 'cover' }} />
+              </div>
+            )}
             <PassportField label="Product name" value={passport?.identity?.productName} />
             <PassportField label="Category" value={passport?.identity?.category} />
             <PassportField label="Material" value={passport?.materials} />
@@ -1000,24 +1023,33 @@ function ValidationPage() {
 }
 
 function OpportunitiesPage() {
+  const { id } = useParams();
   const opportunities = [
-    { title: 'Institutional Channel', type: 'Channel', description: 'A structured route for presenting verified product information to institutional audiences.', why: 'Your product has a completed Passport and market-ready specification.' },
-    { title: 'Social Commerce Catalog', type: 'Channel', description: 'A visual, story-led format for sharing a product with customers through catalog content.', why: 'Your product has a clear story, material, and use case to present.' },
-    { title: 'General Online Listing', type: 'Channel', description: 'A flexible product listing format for online discovery and direct customer interest.', why: 'Your verified Passport can provide consistent listing details across channels.' },
+    { title: 'Institutional Channel', type: 'Future Channel', description: 'A structured route for presenting verified product information to institutional audiences.', why: 'Your product has a completed Passport and market-ready specification.', link: 'https://gem.gov.in/', platformName: 'GeM Portal' },
+    { title: 'Social Commerce Catalog', type: 'Future Channel', description: 'A visual, story-led format for sharing a product with customers through catalog content.', why: 'Your product has a clear story, material, and use case to present.', link: 'https://www.instagram.com/', platformName: 'Instagram' },
+    { title: 'General Online Listing', type: 'Future Channel', description: 'A flexible product listing format for online discovery and direct customer interest.', why: 'Your verified Passport can provide consistent listing details across channels.', link: 'https://www.etsy.com/', platformName: 'Etsy' },
   ];
 
   return (
-    <AppLayout title="Explore Opportunities" description="Prototype channels selected from your market-ready product information.">
-      <div className="opportunity-notice"><Sparkles size={18} /><span>Prototype opportunities only. No live marketplace connection or eligibility claim is being made.</span></div>
+    <AppLayout title="Market Linkage &amp; Opportunities" description="Curated opportunity cards working as future integration prototypes.">
+      <div className="opportunity-notice" style={{ backgroundColor: '#fff3cd', color: '#856404', padding: '12px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px', border: '1px solid #ffeeba' }}>
+        <Sparkles size={18} />
+        <span><strong>Prototype / Future Feature:</strong> No fake live integration. These curated opportunity cards link to external platform websites for demonstration purposes only.</span>
+      </div>
       <div className="card-grid opportunities-grid">
         {opportunities.map((opportunity) => (
-          <article className="surface-card opportunity-card" key={opportunity.title}>
-            <span className="status-pill small">{opportunity.type}</span>
-            <h3>{opportunity.title}</h3>
-            <p>{opportunity.description}</p>
-            <div className="kv-row"><span>Relevant because</span><strong>{opportunity.why}</strong></div>
-            <span className="prototype-label">Prototype opportunity</span>
-          </article>
+          <a href={opportunity.link} target="_blank" rel="noreferrer" key={opportunity.title} style={{ textDecoration: 'none', color: 'inherit', display: 'flex' }}>
+            <article className="surface-card opportunity-card" style={{ border: '2px dashed var(--border)', width: '100%', display: 'flex', flexDirection: 'column' }}>
+              <span className="status-pill small neutral" style={{ alignSelf: 'flex-start' }}>{opportunity.type}</span>
+              <h3 style={{ marginTop: '12px' }}>{opportunity.title}</h3>
+              <p>{opportunity.description}</p>
+              <div className="kv-row" style={{ marginTop: 'auto', paddingTop: '16px' }}><span>Relevant because</span><strong>{opportunity.why}</strong></div>
+              <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span className="prototype-label" style={{ color: 'var(--muted)', fontWeight: 'bold', fontSize: '12px', backgroundColor: '#f1f5f9', padding: '4px 8px', borderRadius: '4px' }}>Prototype / Future</span>
+                <span className="button primary small" style={{ display: 'inline-flex' }}>Explore ➔</span>
+              </div>
+            </article>
+          </a>
         ))}
       </div>
     </AppLayout>
