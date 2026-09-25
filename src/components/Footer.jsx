@@ -16,7 +16,7 @@ export default function Footer() {
         </button>
       </div>
       <div className="footer-bottom">
-        <div>Empowering artisan makers across global marketplaces. PА © 2026</div>
+        <div>Empowering artisan makers across global marketplaces. Pए © 2026</div>
         <AnimatedBackground
           enableHover
           layoutId="footer-animated-bg"

@@ -11,7 +11,7 @@ const getOpenRouterClient = () => {
       Authorization: apiKey ? `Bearer ${apiKey}` : undefined,
       'Content-Type': 'application/json',
       'HTTP-Referer': process.env.CLIENT_URL || 'http://localhost:5173',
-      'X-Title': 'PА Artisan Productization',
+      'X-Title': 'Pए Artisan Productization',
     },
   });
 };

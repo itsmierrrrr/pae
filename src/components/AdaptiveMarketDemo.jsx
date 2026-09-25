@@ -19,7 +19,7 @@ export default function AdaptiveMarketDemo() {
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
         <h2>Bamboo Storage Basket.<br />Prepared for every market.</h2>
         <p style={{ color: 'var(--text-muted)', fontSize: '18px' }}>
-          PА keeps the artisan story intact while adapting the product details for each marketplace requirement.
+          Pए keeps the artisan story intact while adapting the product details for each marketplace requirement.
         </p>
       </div>
 
@@ -149,7 +149,7 @@ export default function AdaptiveMarketDemo() {
                   </div>
                   <div style={{ fontSize: '12px', color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '6px', fontWeight: '600' }}>Product Organization</div>
                   <div style={{ display: 'flex', gap: '16px', fontSize: '13px' }}>
-                    <div><strong style={{color:'#111827'}}>Vendor:</strong> PА Local</div>
+                    <div><strong style={{color:'#111827'}}>Vendor:</strong> Pए Local</div>
                     <div><strong style={{color:'#111827'}}>Type:</strong> Home & Storage</div>
                   </div>
                 </motion.div>

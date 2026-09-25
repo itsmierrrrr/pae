@@ -9,7 +9,7 @@ export default function Hero() {
       <section className="section-padding hero-section">
         <div className="hero-content">
           <h1>
-            PА for artisan makers.<br />
+            Pए for artisan makers.<br />
             <span>Bamboo storage basket, ready for every market.</span>
           </h1>
           <p style={{ minHeight: '80px' }}>
@@ -31,7 +31,7 @@ export default function Hero() {
           {/* Decorative element representing a product being translated */}
           <div style={{ background: '#fff', borderRadius: '16px', padding: '24px', width: '100%', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
-                <span style={{ fontSize: '12px', color: '#16a34a', fontWeight: 'bold' }}>PА PRODUCT PASSPORT</span>
+                <span style={{ fontSize: '12px', color: '#16a34a', fontWeight: 'bold' }}>Pए PRODUCT PASSPORT</span>
                 <span style={{ background: '#fef08a', color: '#854d0e', padding: '2px 8px', borderRadius: '12px', fontSize: '12px' }}>Ready for Amazon</span>
              </div>
              <h3 style={{ fontSize: '20px', marginBottom: '16px' }}>Bamboo Storage Basket</h3>
@@ -77,7 +77,7 @@ export default function Hero() {
           </div>
         </div>
         <p style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto', fontSize: '18px', opacity: 0.9 }}>
-          PА turns artisan product information into market-ready listings while keeping the story, materials, and craftsmanship intact.
+          Pए turns artisan product information into market-ready listings while keeping the story, materials, and craftsmanship intact.
           It helps every basket, textile, and handmade item speak clearly across platforms.
         </p>
       </section>

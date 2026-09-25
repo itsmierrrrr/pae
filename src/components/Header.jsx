@@ -1,6 +1,7 @@
-import React from 'react';
+﻿import React from 'react';
 import { AnimatedBackground } from './AnimatedBackground';
 import { GlowButton } from './GlowButton';
+import logo from '../assets/logo.png';
 
 export default function Header() {
   const TABS = [
@@ -17,12 +18,7 @@ export default function Header() {
       data-scroll-target="#main-scroll-container"
       style={{ zIndex: 100 }}
     >
-      <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <span style={{ fontWeight: 700 }}>PА</span>
-        <span style={{ fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6b7280' }}>
-          of the artisans.
-        </span>
-      </div>
+      <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><img src={logo} alt="Pae Logo" style={{ height: '40px' }} /></div>
 
       <AnimatedBackground
         defaultValue={TABS[0].name}
@@ -65,3 +61,9 @@ export default function Header() {
     </header>
   );
 }
+
+
+
+
+
+

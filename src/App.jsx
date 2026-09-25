@@ -4,8 +4,9 @@ import { ArrowLeft, Camera, CircleCheckBig, CircleDollarSign, Compass, Home, Ima
 import api from './api.js';
 import { XIcon, InstagramIcon, LinkedInIcon } from './components/SocialIcons.jsx';
 import './App.css';
+import logo from './assets/logo.png';
 
-const STORAGE_KEY = 'pae_auth_token';
+const STORAGE_KEY = 'pae_auth_token'; // storage key: pae = Pए
 
 const initialForm = {
   title: '',
@@ -63,11 +64,7 @@ function LandingPage({ token }) {
     <>
       <header className="topbar landing-topbar">
         <div className="brand-wrap">
-          <div className="brand-mark">PА</div>
-          <div>
-            <div className="brand-name">PА</div>
-            <div className="brand-subtitle">From Craft to Market</div>
-          </div>
+          <img src={logo} alt="Pए" style={{ height: '36px' }} />
         </div>
         <nav className={`nav ${menuOpen ? 'nav-open' : ''}`}>
           <NavLink to="/" end onClick={() => setMenuOpen(false)}><Home size={16} /> Home</NavLink>
@@ -149,7 +146,7 @@ function LandingPage({ token }) {
         <section className="landing-gallery-section">
           <div className="gallery-heading">
             <div><p className="eyebrow">Made for the hands behind the work</p><h2>Every detail deserves a place.</h2></div>
-            <p>Keep the material, method, and meaning close to the product. PА turns those details into a passport you can trust and a story customers can understand.</p>
+            <p>Keep the material, method, and meaning close to the product. Pए turns those details into a passport you can trust and a story customers can understand.</p>
           </div>
           <div className="landing-gallery">
             <article className="gallery-tile gallery-tile-wide"><img src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?auto=format&fit=crop&w=1200&q=85" alt="Artisan hands shaping handmade work" /><div><span>Craft in context</span><strong>Show the making, not just the finished piece.</strong></div></article>
@@ -181,7 +178,7 @@ function LandingPage({ token }) {
       <footer className="app-footer landing-footer">
         <div className="footer-content">
           <div className="footer-brand">
-            <strong style={{ fontSize: '20px', letterSpacing: '0.05em' }}>PA</strong>
+            <img src={logo} alt="Pए" style={{ height: '30px' }} />
             <span style={{ display: 'block', fontSize: '12px', color: 'var(--muted)', marginTop: '2px' }}>From Craft to Market</span>
           </div>
           <nav style={{ display: 'flex', gap: '24px', fontSize: '14px' }}>
@@ -307,7 +304,7 @@ function AuthLayout({ title, caption, children }) {
     <div className="auth-page">
       <div className="auth-shell">
         <div className="auth-panel">
-          <div className="brand-mark large">PА</div>
+          <img src={logo} alt="Pए" style={{ height: '42px', marginBottom: '8px' }} />
           <h2>{title}</h2>
           <p>{caption}</p>
           <div className="mini-progress">
@@ -1150,11 +1147,7 @@ function AppLayout({ title, description, children, journeyOverride }) {
     <div className="page-shell">
       <header className="topbar page-header workspace-topbar">
         <div className="brand-wrap">
-          <div className="brand-mark">PА</div>
-          <div>
-            <div className="brand-name">PА</div>
-            <div className="brand-subtitle">From Craft to Market</div>
-          </div>
+          <img src={logo} alt="Pए" style={{ height: '36px' }} />
         </div>
         <nav className={`nav inner-nav ${menuOpen ? 'nav-open' : ''}`}>
           <NavLink to="/dashboard" onClick={() => setMenuOpen(false)}><LayoutDashboard size={16} /> Dashboard</NavLink>
@@ -1191,7 +1184,7 @@ function AppLayout({ title, description, children, journeyOverride }) {
       <footer className="app-footer">
         <div className="footer-content">
           <div className="footer-brand">
-            <strong style={{ fontSize: '18px' }}>PA</strong>
+            <img src={logo} alt="Pए" style={{ height: '28px' }} />
             <span style={{ display: 'block', fontSize: '12px', color: 'var(--navy-soft)' }}>From Craft to Market</span>
           </div>
           <div className="footer-links" style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
