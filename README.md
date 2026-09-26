@@ -63,6 +63,8 @@ Pre-Rejection Check
         v
 Market-Ready Product
 
+The Product Passport acts as the canonical product representation used across the system.
+
 Key Features
 1. AI Productization
 
