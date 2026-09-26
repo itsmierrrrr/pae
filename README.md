@@ -2,7 +2,6 @@
 
 > An AI-powered digital commerce enablement platform that helps artisans transform handmade products into structured, verified, priced, and market-ready digital products.
 
-**Smart India Hackathon 2026 | SIH 2026 Prototype**
 
 ---
 
